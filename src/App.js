@@ -1,7 +1,8 @@
+import ZapRecall from "./components/ZapRecall";
 
 function App() {
   return (
-    <div></div>
+    <ZapRecall />
   );
 }
 
