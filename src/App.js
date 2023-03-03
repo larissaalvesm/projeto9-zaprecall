@@ -1,8 +1,12 @@
 import ZapRecall from "./components/ZapRecall";
+import GlobalStyle from './globalStyles';
 
 function App() {
   return (
-    <ZapRecall />
+    <>
+      <GlobalStyle />
+      <ZapRecall />
+    </>
   );
 }
 
