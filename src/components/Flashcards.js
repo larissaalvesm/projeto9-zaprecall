@@ -2,6 +2,9 @@ import styled from "styled-components";
 import cards from "../mock";
 import seta_play from "../assets/seta_play.png";
 import seta_virar from "../assets/seta_virar.png";
+import icone_certo from "../assets/icone_certo.png";
+import icone_erro from "../assets/icone_erro.png";
+import icone_quase from "../assets/icone_quase.png";
 
 export default function Flashcards() {
     return (
@@ -36,7 +39,7 @@ const CardVirado = styled.div`
     position:relative;
 
     img{
-        width: 20px;
+        width: 23px;
         height: 23px;
         position:absolute;
         bottom: 21px;
@@ -45,6 +48,10 @@ const CardVirado = styled.div`
 
     h1{
         color:#333333;
+        //color: #FF3030;
+        //color: #2FBE34;
+        //color: #FF922E;
+        //text-decoration: line-through;
         font-family: 'Recursive', sans-serif;
         font-style: 'Sans Casual Bold';
         font-weight: bold;
