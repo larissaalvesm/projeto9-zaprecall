@@ -45,6 +45,7 @@ const CardVirado = styled.div`
     button{
         border: none;
         cursor: pointer;
+        padding: 0;
     }
 
     img{
