@@ -44,7 +44,7 @@ const CardVirado = styled.div`
 
     button{
         border: none;
-        cursor: pointer;
+        cursor: ${props => props.cardsIniciados.includes(props.index) ? "auto" : "pointer"};;
         padding: 0;
     }
 
