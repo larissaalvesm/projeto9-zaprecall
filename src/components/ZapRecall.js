@@ -9,24 +9,28 @@ import { useState } from "react";
 export default function ZapRecall() {
 
     const [cardsIniciados, setCardsIniciados] = useState([]);
-    const [cardIniciado, setCardIniciado] = useState(false);
+    const [cardsVirados, setCardsVirados] = useState([]);
 
     function iniciarCard(index) {
-
         if (!cardsIniciados.includes(index)) {
             const novosCardsIniciados = [...cardsIniciados, index];
             setCardsIniciados(novosCardsIniciados);
-
         }
-
     }
+
+    function virarCard(index) {
+        if (!cardsVirados.includes(index)) {
+            setCardsVirados([...cardsVirados, index]);
+        }
+    }
+
     return (
         <Container>
             <Topo>
                 <img src={logo} alt="ZapRecall" />
                 <h1>ZapRecall</h1>
             </Topo>
-            <Deck cards={cards} cardsIniciados={cardsIniciados} setCardsIniciados={setCardsIniciados} iniciarCard={iniciarCard} />
+            <Deck cards={cards} cardsIniciados={cardsIniciados} iniciarCard={iniciarCard} virarCard={virarCard} cardsVirados={cardsVirados} />
             <ContadorConcluidos cards={cards} />
         </Container>
     )

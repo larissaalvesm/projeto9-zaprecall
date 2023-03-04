@@ -7,7 +7,7 @@ import icone_quase from "../assets/icone_quase.png";
 import cards from "../mock";
 
 export default function Flashcards(props) {
-    const { card, index, cardsIniciados, setCardsIniciados, iniciarCard } = props;
+    const { card, index, cardsIniciados, iniciarCard, virarCard, cardsVirados } = props;
     console.log(cardsIniciados)
     return (
         <>
@@ -15,11 +15,11 @@ export default function Flashcards(props) {
                 <h1>Pergunta {index + 1}</h1>
                 <button onClick={() => iniciarCard(index)}><img src={seta_play} alt="seta-play" /></button>
             </CardVirado>
-            <Pergunta cardsIniciados={cardsIniciados} index={index}>
+            <Pergunta cardsIniciados={cardsIniciados} index={index} cardsVirados={cardsVirados}>
                 <p>{card.question}</p>
-                <button><img src={seta_virar} /></button>
+                <button onClick={() => virarCard(index)}><img src={seta_virar} /></button>
             </Pergunta>
-            <Resposta>
+            <Resposta cardsVirados={cardsVirados} index={index}>
                 <p>{card.answer}</p>
                 <div>
                     <Vermelho>Não lembrei</Vermelho>
@@ -70,7 +70,7 @@ const CardVirado = styled.div`
 `
 
 const Pergunta = styled.div`
-    display: ${props => props.cardsIniciados.includes(props.index) ? "initial" : "none"};
+    display: ${props => props.cardsIniciados.includes(props.index) && !props.cardsVirados.includes(props.index) ? "initial" : "none"};
     position: relative;
     width: 299px;
     min-height: 131px;
@@ -103,7 +103,7 @@ const Pergunta = styled.div`
 `
 
 const Resposta = styled.div`
-    display: none;
+    display: ${props => props.cardsVirados.includes(props.index) ? "initial" : "none"};
     position: relative;
     width: 299px;
     min-height: 131px;
@@ -137,6 +137,7 @@ const Vermelho = styled.button`
         color:#FFFFFF;
         background-color: #FF3030;
         border:none;
+        cursor: pointer;
 `
 const Verde = styled.button`
         width: 85px;
@@ -145,6 +146,7 @@ const Verde = styled.button`
         color:#FFFFFF;
         background-color: #2FBE34;
         border:none;
+        cursor: pointer;
 `
 const Amarelo = styled.button`
         width: 85px;
@@ -153,4 +155,5 @@ const Amarelo = styled.button`
         color:#FFFFFF;
         background-color: #FF922E;
         border:none;
+        cursor: pointer;
 `
