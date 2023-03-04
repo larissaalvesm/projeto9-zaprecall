@@ -10,24 +10,24 @@ export default function Flashcards(props) {
     const { card, index, cardsIniciados, iniciarCard, virarCard, cardsVirados } = props;
     console.log(cardsIniciados)
     return (
-        <>
+        <div data-test="flashcard">
             <CardVirado cardsIniciados={cardsIniciados} index={index}>
-                <h1>Pergunta {index + 1}</h1>
-                <button onClick={() => iniciarCard(index)}><img src={seta_play} alt="seta-play" /></button>
+                <h1 data-test="flashcard-text">Pergunta {index + 1}</h1>
+                <button data-test="play-btn" onClick={() => iniciarCard(index)}><img src={seta_play} alt="seta-play" /></button>
             </CardVirado>
             <Pergunta cardsIniciados={cardsIniciados} index={index} cardsVirados={cardsVirados}>
-                <p>{card.question}</p>
-                <button onClick={() => virarCard(index)}><img src={seta_virar} /></button>
+                <p data-test="flashcard-text">{card.question}</p>
+                <button data-test="turn-btn" onClick={() => virarCard(index)}><img src={seta_virar} /></button>
             </Pergunta>
             <Resposta cardsVirados={cardsVirados} index={index}>
-                <p>{card.answer}</p>
+                <p data-test="flashcard-text">{card.answer}</p>
                 <div>
-                    <Vermelho>Não lembrei</Vermelho>
-                    <Amarelo>Quase não lembrei</Amarelo>
-                    <Verde>Zap!</Verde>
+                    <Vermelho data-test="no-btn">Não lembrei</Vermelho>
+                    <Amarelo data-test="partial-btn">Quase não lembrei</Amarelo>
+                    <Verde data-test="zap-btn">Zap!</Verde>
                 </div>
             </Resposta>
-        </>
+        </div>
     )
 }
 
@@ -106,7 +106,7 @@ const Resposta = styled.div`
     display: ${props => props.cardsVirados.includes(props.index) ? "initial" : "none"};
     position: relative;
     width: 299px;
-    min-height: 131px;
+    
     background-color: #FFFFD4;
     border-radius: 5px;
     padding: 15px;
@@ -122,7 +122,7 @@ const Resposta = styled.div`
     }
 
     div {
-        margin-top: 22px;
+        margin-top: 15px;
         display: flex;
         justify-content: space-between;
     }
@@ -138,6 +138,7 @@ const Vermelho = styled.button`
         background-color: #FF3030;
         border:none;
         cursor: pointer;
+       
 `
 const Verde = styled.button`
         width: 85px;
@@ -147,6 +148,7 @@ const Verde = styled.button`
         background-color: #2FBE34;
         border:none;
         cursor: pointer;
+       
 `
 const Amarelo = styled.button`
         width: 85px;
@@ -156,4 +158,5 @@ const Amarelo = styled.button`
         background-color: #FF922E;
         border:none;
         cursor: pointer;
+
 `
