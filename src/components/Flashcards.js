@@ -4,18 +4,20 @@ import seta_virar from "../assets/seta_virar.png";
 import icone_certo from "../assets/icone_certo.png";
 import icone_erro from "../assets/icone_erro.png";
 import icone_quase from "../assets/icone_quase.png";
+import cards from "../mock";
 
 export default function Flashcards(props) {
-    const { card, index } = props;
+    const { card, index, cardsIniciados, setCardsIniciados, iniciarCard } = props;
+    console.log(cardsIniciados)
     return (
         <>
-            <CardVirado>
+            <CardVirado cardsIniciados={cardsIniciados} index={index}>
                 <h1>Pergunta {index + 1}</h1>
-                <img src={seta_play} alt="seta-play" />
+                <button onClick={() => iniciarCard(index)}><img src={seta_play} alt="seta-play" /></button>
             </CardVirado>
-            <Pergunta>
+            <Pergunta cardsIniciados={cardsIniciados} index={index}>
                 <p>{card.question}</p>
-                <img src={seta_virar} />
+                <button><img src={seta_virar} /></button>
             </Pergunta>
             <Resposta>
                 <p>{card.answer}</p>
@@ -30,6 +32,7 @@ export default function Flashcards(props) {
 }
 
 const CardVirado = styled.div`
+    display: ${props => props.cardsIniciados.includes(props.index) ? "none" : "initial"};
     width: 305px;
     min-height: 65px;
     background-color: #FFFFFF;
@@ -37,6 +40,11 @@ const CardVirado = styled.div`
     margin-bottom: 20px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     position:relative;
+
+    button{
+        border: none;
+        cursor: pointer;
+    }
 
     img{
         width: 23px;
@@ -62,7 +70,7 @@ const CardVirado = styled.div`
 `
 
 const Pergunta = styled.div`
-    display: none;
+    display: ${props => props.cardsIniciados.includes(props.index) ? "initial" : "none"};
     position: relative;
     width: 299px;
     min-height: 131px;
@@ -86,6 +94,11 @@ const Pergunta = styled.div`
         font-style: 'Sans Casual';
         font-size: 18px;
         line-height: 22px;
+    }
+
+    button{
+        border: none;
+        cursor: pointer;
     }
 `
 

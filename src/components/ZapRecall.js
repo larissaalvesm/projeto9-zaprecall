@@ -3,16 +3,30 @@ import Deck from "./Deck";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
 import cards from "../mock";
+import { useState } from "react";
 
 
 export default function ZapRecall() {
+
+    const [cardsIniciados, setCardsIniciados] = useState([]);
+    const [cardIniciado, setCardIniciado] = useState(false);
+
+    function iniciarCard(index) {
+
+        if (!cardsIniciados.includes(index)) {
+            const novosCardsIniciados = [...cardsIniciados, index];
+            setCardsIniciados(novosCardsIniciados);
+
+        }
+
+    }
     return (
         <Container>
             <Topo>
                 <img src={logo} alt="ZapRecall" />
                 <h1>ZapRecall</h1>
             </Topo>
-            <Deck cards={cards} />
+            <Deck cards={cards} cardsIniciados={cardsIniciados} setCardsIniciados={setCardsIniciados} iniciarCard={iniciarCard} />
             <ContadorConcluidos cards={cards} />
         </Container>
     )
@@ -51,5 +65,5 @@ const Container = styled.div`
     width: 375px;
     height: 100vh;
     margin-right: auto;
-    margin-left:auto;
+    margin-left: auto;
 `

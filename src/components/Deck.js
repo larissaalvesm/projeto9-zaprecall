@@ -2,10 +2,10 @@ import Flashcards from "./Flashcards.js";
 import styled from "styled-components";
 
 export default function Deck(props) {
-    const { cards } = props;
+    const { cards, cardsIniciados, setCardsIniciados, iniciarCard } = props;
     return (
         <ContainerDeck>
-            {cards.map((card, index) => <Flashcards card={card} index={index} />)}
+            {cards.map((card, index) => <Flashcards key={card.question} card={card} index={index} cardsIniciados={cardsIniciados} setCardsIniciados={setCardsIniciados} iniciarCard={iniciarCard} />)}
         </ContainerDeck>
 
     )
