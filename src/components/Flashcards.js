@@ -13,7 +13,7 @@ export default function Flashcards(props) {
         <>
             <CardVirado data-test="flashcard" cardsIniciados={cardsIniciados} index={index} cardsRespondidos={cardsRespondidos} cardsIncorretos={cardsIncorretos} cardsParcialmenteCorretos={cardsParcialmenteCorretos} cardsCorretos={cardsCorretos}>
                 <h1 data-test="flashcard-text">Pergunta {index + 1}</h1>
-                <button data-test={!cardsRespondidos.includes(index) ? "play-btn" : (cardsIncorretos.includes(index) ? "no-icon" : (cardsCorretos.includes(index) ? "zap-icon" : "partial-icon"))} onClick={() => iniciarCard(index)}><img src={!cardsRespondidos.includes(index) ? seta_play : (cardsIncorretos.includes(index) ? icone_erro : (cardsCorretos.includes(index) ? icone_certo : icone_quase))} alt="status" /></button>
+                <button ><img data-test={!cardsRespondidos.includes(index) ? "play-btn" : (cardsIncorretos.includes(index) ? "no-icon" : (cardsCorretos.includes(index) ? "zap-icon" : "partial-icon"))} onClick={() => iniciarCard(index)} src={!cardsRespondidos.includes(index) ? seta_play : (cardsIncorretos.includes(index) ? icone_erro : (cardsCorretos.includes(index) ? icone_certo : icone_quase))} alt="status" /></button>
             </CardVirado>
             <Pergunta data-test="flashcard" cardsIniciados={cardsIniciados} index={index} cardsVirados={cardsVirados}>
                 <p data-test="flashcard-text">{card.question}</p>
