@@ -10,6 +10,11 @@ export default function ZapRecall() {
 
     const [cardsIniciados, setCardsIniciados] = useState([]);
     const [cardsVirados, setCardsVirados] = useState([]);
+    const [cardsRespondidos, setCardsRespondidos] = useState([]);
+    const [numCardsRespondidos, setNumCardsRespondidos] = useState(0);
+    const [cardsIncorretos, setCardsIncorretos] = useState([]);
+    const [cardsParcialmenteCorretos, setCardsParcialmenteCorretos] = useState([]);
+    const [cardsCorretos, setCardsCorretos] = useState([]);
 
     function iniciarCard(index) {
         if (!cardsIniciados.includes(index)) {
@@ -24,14 +29,39 @@ export default function ZapRecall() {
         }
     }
 
+    function alterarCorreto(index) {
+        setCardsCorretos([...cardsCorretos, index]);
+        setCardsRespondidos([...cardsRespondidos, index]);
+        const novoNumRespondidos = numCardsRespondidos + 1;
+        setNumCardsRespondidos(novoNumRespondidos);
+
+    }
+
+    function alterarParcialCorreto(index) {
+        setCardsParcialmenteCorretos([...cardsParcialmenteCorretos, index]);
+        setCardsRespondidos([...cardsRespondidos, index]);
+        const novoNumRespondidos = numCardsRespondidos + 1;
+        setNumCardsRespondidos(novoNumRespondidos);
+    }
+
+    function alterarIncorreto(index) {
+        setCardsIncorretos([...cardsIncorretos, index]);
+        setCardsRespondidos([...cardsRespondidos, index]);
+        const novoNumRespondidos = numCardsRespondidos + 1;
+        setNumCardsRespondidos(novoNumRespondidos);
+    }
+
     return (
         <Container>
             <Topo>
                 <img src={logo} alt="ZapRecall" />
                 <h1>ZapRecall</h1>
             </Topo>
-            <Deck cards={cards} cardsIniciados={cardsIniciados} iniciarCard={iniciarCard} virarCard={virarCard} cardsVirados={cardsVirados} />
-            <ContadorConcluidos cards={cards} />
+            <Deck cards={cards} cardsIniciados={cardsIniciados} iniciarCard={iniciarCard}
+                virarCard={virarCard} cardsVirados={cardsVirados} cardsRespondidos={cardsRespondidos}
+                cardsIncorretos={cardsIncorretos} cardsParcialmenteCorretos={cardsParcialmenteCorretos}
+                cardsCorretos={cardsCorretos} alterarCorreto={alterarCorreto} alterarParcialCorreto={alterarParcialCorreto} alterarIncorreto={alterarIncorreto} />
+            <ContadorConcluidos cards={cards} numCardsRespondidos={numCardsRespondidos} />
         </Container>
     )
 }

@@ -7,32 +7,33 @@ import icone_quase from "../assets/icone_quase.png";
 import cards from "../mock";
 
 export default function Flashcards(props) {
-    const { card, index, cardsIniciados, iniciarCard, virarCard, cardsVirados } = props;
+    const { card, index, cardsIniciados, iniciarCard, virarCard, cardsVirados, cardsRespondidos, cardsIncorretos, cardsParcialmenteCorretos, cardsCorretos, alterarCorreto, alterarParcialCorreto, alterarIncorreto } = props;
     console.log(cardsIniciados)
     return (
-        <div data-test="flashcard">
-            <CardVirado cardsIniciados={cardsIniciados} index={index}>
+        <>
+            <CardVirado data-test="flashcard" cardsIniciados={cardsIniciados} index={index} cardsRespondidos={cardsRespondidos} cardsIncorretos={cardsIncorretos} cardsParcialmenteCorretos={cardsParcialmenteCorretos} cardsCorretos={cardsCorretos}>
                 <h1 data-test="flashcard-text">Pergunta {index + 1}</h1>
-                <button data-test="play-btn" onClick={() => iniciarCard(index)}><img src={seta_play} alt="seta-play" /></button>
+                <button data-test={!cardsRespondidos.includes(index) ? "play-btn" : (cardsIncorretos.includes(index) ? "no-icon" : (cardsCorretos.includes(index) ? "zap-icon" : "partial-icon"))} onClick={() => iniciarCard(index)}><img src={!cardsRespondidos.includes(index) ? seta_play : (cardsIncorretos.includes(index) ? icone_erro : (cardsCorretos.includes(index) ? icone_certo : icone_quase))} alt="status" /></button>
             </CardVirado>
-            <Pergunta cardsIniciados={cardsIniciados} index={index} cardsVirados={cardsVirados}>
+            <Pergunta data-test="flashcard" cardsIniciados={cardsIniciados} index={index} cardsVirados={cardsVirados}>
                 <p data-test="flashcard-text">{card.question}</p>
                 <button data-test="turn-btn" onClick={() => virarCard(index)}><img src={seta_virar} /></button>
             </Pergunta>
-            <Resposta cardsVirados={cardsVirados} index={index}>
+            <Resposta data-test="flashcard" cardsVirados={cardsVirados} index={index} cardsRespondidos={cardsRespondidos}>
                 <p data-test="flashcard-text">{card.answer}</p>
                 <div>
-                    <Vermelho data-test="no-btn">Não lembrei</Vermelho>
-                    <Amarelo data-test="partial-btn">Quase não lembrei</Amarelo>
-                    <Verde data-test="zap-btn">Zap!</Verde>
+                    <Vermelho data-test="no-btn" onClick={() => alterarIncorreto(index)}>Não lembrei</Vermelho>
+                    <Amarelo data-test="partial-btn" onClick={() => alterarParcialCorreto(index)}>Quase não lembrei</Amarelo>
+                    <Verde data-test="zap-btn" onClick={() => alterarCorreto(index)}>Zap!</Verde>
                 </div>
             </Resposta>
-        </div>
+        </>
     )
 }
 
+
 const CardVirado = styled.div`
-    display: ${props => props.cardsIniciados.includes(props.index) ? "none" : "initial"};
+    display: ${props => props.cardsIniciados.includes(props.index) && !props.cardsRespondidos.includes(props.index) ? "none" : "initial"};
     width: 305px;
     min-height: 65px;
     background-color: #FFFFFF;
@@ -55,11 +56,8 @@ const CardVirado = styled.div`
     }
 
     h1{
-        color:#333333;
-        //color: #FF3030;
-        //color: #2FBE34;
-        //color: #FF922E;
-        //text-decoration: line-through;
+        color:${props => !props.cardsRespondidos.includes(props.index) ? "#333333" : (props => props.cardsIncorretos.includes(props.index) ? "#FF3030" : (props => props.cardsCorretos.includes(props.index) ? "#2FBE34" : "#FF922E"))};
+        text-decoration: ${props => props.cardsRespondidos.includes(props.index) ? "line-through" : "none"};
         font-family: 'Recursive', sans-serif;
         font-style: 'Sans Casual Bold';
         font-weight: bold;
@@ -103,7 +101,7 @@ const Pergunta = styled.div`
 `
 
 const Resposta = styled.div`
-    display: ${props => props.cardsVirados.includes(props.index) ? "initial" : "none"};
+    display: ${props => props.cardsVirados.includes(props.index) && !props.cardsRespondidos.includes(props.index) ? "initial" : "none"};
     position: relative;
     width: 299px;
     

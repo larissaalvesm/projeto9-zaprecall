@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
-export default function ContadorConcluidos() {
+export default function ContadorConcluidos(props) {
+
+    const { cards, numCardsRespondidos } = props
+
     return (
         <Footer>
-            <p>0/4 CONCLUÍDOS</p>
+            <p data-test="footer">{numCardsRespondidos}/{cards.length} CONCLUÍDOS</p>
         </Footer>
     )
 }
