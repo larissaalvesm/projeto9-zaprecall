@@ -2,6 +2,7 @@ import ContadorConcluidos from "./ContadorConcluidos.js";
 import Deck from "./Deck";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import cards from "../mock";
 
 
 export default function ZapRecall() {
@@ -11,8 +12,8 @@ export default function ZapRecall() {
                 <img src={logo} alt="ZapRecall" />
                 <h1>ZapRecall</h1>
             </Topo>
-            <Deck />
-            <ContadorConcluidos />
+            <Deck cards={cards} />
+            <ContadorConcluidos cards={cards} />
         </Container>
     )
 }

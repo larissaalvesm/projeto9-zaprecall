@@ -1,24 +1,24 @@
 import styled from "styled-components";
-import cards from "../mock";
 import seta_play from "../assets/seta_play.png";
 import seta_virar from "../assets/seta_virar.png";
 import icone_certo from "../assets/icone_certo.png";
 import icone_erro from "../assets/icone_erro.png";
 import icone_quase from "../assets/icone_quase.png";
 
-export default function Flashcards() {
+export default function Flashcards(props) {
+    const { card, index } = props;
     return (
         <>
             <CardVirado>
-                <h1>Pergunta 1</h1>
+                <h1>Pergunta {index + 1}</h1>
                 <img src={seta_play} alt="seta-play" />
             </CardVirado>
             <Pergunta>
-                <p>O que é JSX?</p>
+                <p>{card.question}</p>
                 <img src={seta_virar} />
             </Pergunta>
             <Resposta>
-                <p>JSX é uma sintaxe para escrever HTML dentro do JS</p>
+                <p>{card.answer}</p>
                 <div>
                     <Vermelho>Não lembrei</Vermelho>
                     <Amarelo>Quase não lembrei</Amarelo>

@@ -1,17 +1,11 @@
 import Flashcards from "./Flashcards.js";
 import styled from "styled-components";
 
-export default function Deck() {
+export default function Deck(props) {
+    const { cards } = props;
     return (
         <ContainerDeck>
-            <Flashcards />
-            <Flashcards />
-            <Flashcards />
-            <Flashcards />
-            <Flashcards />
-            <Flashcards />
-            <Flashcards />
-            <Flashcards />
+            {cards.map((card, index) => <Flashcards card={card} index={index} />)}
         </ContainerDeck>
 
     )
