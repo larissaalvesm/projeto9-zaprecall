@@ -8,7 +8,6 @@ import cards from "../mock";
 
 export default function Flashcards(props) {
     const { card, index, cardsIniciados, iniciarCard, virarCard, cardsVirados, cardsRespondidos, cardsIncorretos, cardsParcialmenteCorretos, cardsCorretos, alterarCorreto, alterarParcialCorreto, alterarIncorreto } = props;
-    console.log(cardsIniciados)
     return (
         <>
             <CardVirado data-test="flashcard" cardsIniciados={cardsIniciados} index={index} cardsRespondidos={cardsRespondidos} cardsIncorretos={cardsIncorretos} cardsParcialmenteCorretos={cardsParcialmenteCorretos} cardsCorretos={cardsCorretos}>
@@ -44,7 +43,7 @@ const CardVirado = styled.div`
 
     button{
         border: none;
-        cursor: ${props => props.cardsIniciados.includes(props.index) ? "auto" : "pointer"};;
+        cursor: ${props => props.cardsIniciados.includes(props.index) ? "auto" : "pointer"};
         padding: 0;
     }
 
@@ -98,6 +97,7 @@ const Pergunta = styled.div`
     button{
         border: none;
         cursor: pointer;
+        padding: 0;
     }
 `
 
