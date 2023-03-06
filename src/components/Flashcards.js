@@ -97,7 +97,6 @@ const Pergunta = styled.div`
     button{
         border: none;
         cursor: pointer;
-        padding: 0;
     }
 `
 
